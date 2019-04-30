@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  description: REST API for NLP.
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - text/plain; charset=utf-8
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /process_sentences:
+    get:
+      operationId: nlp_processor.process_sentences
+      tags:
+        - Sentence
+      summary: Get array of JSON objects for a sentence.
+      description: Get array of JSON objects for a sentence
+      parameters:
+        - name: sentences_str
+          in: query
+          description: Sentences in a human language.
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully processed input sentences.
+          schema:
+            $ref: '#/definitions/Sentences'
+
+definitions:
+  Feats:
+    properties:
+      # shared article/adjective/pronoun/verb feats
+      number:
+        type: string
+      # shared article/adjective/pronoun feats
+      case:
+        type: string
+      gender:
+        type: string
+      # shared article/pronoun feats
+      pron_type:
+        type: string
+      # shared pronoun/verb feats
+      person:
+        type: string
+      # only article feats
+      definite:
+        type: string
+      # only verb feats
+      mood:
+        type: string
+      tense:
+        type: string
+      verb_form:
+        type: string
+  Word:
+    properties:
+      text:
+        type: string
+      lemma:
+        type: string
+      pos:
+        type: string
+      schema:
+        $ref: '#/definitions/Feats'
+  Sentence:
+    type: array
+    items:
+      $ref: "#/definitions/Word"
+  Sentences:
+    type: array
+    items:
+      $ref: "#/definitions/Sentence"
