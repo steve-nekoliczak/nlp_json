@@ -31,32 +31,6 @@ paths:
             $ref: '#/definitions/Sentences'
 
 definitions:
-  Feats:
-    properties:
-      # shared article/adjective/pronoun/verb feats
-      number:
-        type: string
-      # shared article/adjective/pronoun feats
-      case:
-        type: string
-      gender:
-        type: string
-      # shared article/pronoun feats
-      pron_type:
-        type: string
-      # shared pronoun/verb feats
-      person:
-        type: string
-      # only article feats
-      definite:
-        type: string
-      # only verb feats
-      mood:
-        type: string
-      tense:
-        type: string
-      verb_form:
-        type: string
   Word:
     properties:
       text:
@@ -65,8 +39,9 @@ definitions:
         type: string
       pos:
         type: string
-      schema:
-        $ref: '#/definitions/Feats'
+      feats:
+        type: array
+        items: {}
   Sentence:
     type: array
     items:
