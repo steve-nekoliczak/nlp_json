@@ -39,6 +39,8 @@ definitions:
         type: string
       pos:
         type: string
+      index:
+        type: integer
       feats:
         type: array
         items: {}

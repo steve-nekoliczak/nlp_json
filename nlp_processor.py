@@ -14,6 +14,7 @@ def process_sentences(sentences_str):
             word_obj.text = word.text
             word_obj.lemma = word.lemma
             word_obj.pos = word.upos
+            word_obj.index = word.index
 
             word_obj.feats = dict(x.split('=') for x in word.feats.split('|') if "=" in x)
 
