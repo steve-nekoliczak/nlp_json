@@ -1,14 +1,11 @@
-swagger: "2.0"
+openapi: "3.0.0"
 info:
   description: REST API for NLP.
   version: "1.0.0"
-  title: Swagger Rest Article
-consumes:
-  - text/plain; charset=utf-8
-produces:
-  - application/json
+  title: REST API for NLP.
 
-basePath: /api
+servers:
+  - url: /api
 
 paths:
   /process_sentences:
@@ -22,33 +19,37 @@ paths:
         - name: sentences_str
           in: query
           description: Sentences in a human language.
-          type: string
+          schema:
+            type: string
           required: True
       responses:
         200:
           description: Successfully processed input sentences.
-          schema:
-            $ref: '#/definitions/Sentences'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sentences'
 
-definitions:
-  Word:
-    properties:
-      text:
-        type: string
-      lemma:
-        type: string
-      pos:
-        type: string
-      index:
-        type: integer
-      feats:
-        type: array
-        items: {}
-  Sentence:
-    type: array
-    items:
-      $ref: "#/definitions/Word"
-  Sentences:
-    type: array
-    items:
-      $ref: "#/definitions/Sentence"
+components:
+  schemas:
+    word:
+      properties:
+        text:
+          type: string
+        lemma:
+          type: string
+        pos:
+          type: string
+        index:
+          type: integer
+        feats:
+          type: array
+          items: {}
+    sentence:
+      type: array
+      items:
+        $ref: "#/components/schemas/word"
+    sentences:
+      type: array
+      items:
+        $ref: "#/components/schemas/sentence"
