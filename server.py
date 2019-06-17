@@ -1,4 +1,6 @@
 import argparse
+import os
+from pathlib import Path
 import re
 
 import stanfordnlp
@@ -15,6 +17,9 @@ def get_args():
     ap.add_argument('-l', '--lang', type=str,
                     help="StanfordNLP language code. Check\n" + lang_code_link,
                     default='en')
+    ap.add_argument('-m', '--models_dir', type=str,
+                    help="Directory for language modules.`",
+                    default=os.path.join(Path.home(), 'stanfordnlp_resources'))
     ap.add_argument('-p', '--port', type=int,
                     help="Port number to run this service on.",
                     default=5010)
@@ -32,9 +37,10 @@ if __name__ == "__main__":
 
     try:
         config.nlp = stanfordnlp.Pipeline(lang=args.lang,
+                                          models_dir=args.models_dir,
                                           processors='tokenize,mwt,pos,lemma')
     except KeyError:
-        print('Invalid language selected.')
+        print('Invalid arguments.')
         exit(1)
 
     config.connex_app.run(debug=True, port=args.port)
