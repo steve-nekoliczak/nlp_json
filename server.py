@@ -12,6 +12,9 @@ def get_args():
     ap = argparse.ArgumentParser('Process human language sentences into JSON.')
 
     # Add args
+    ap.add_argument('-d', '--debug',
+                    action='store_true',
+                    help="Enable debugging mode.")
     lang_code_link = \
         "https://stanfordnlp.github.io/stanfordnlp/installation_download.html"
     ap.add_argument('-l', '--lang', type=str,
@@ -43,4 +46,4 @@ if __name__ == "__main__":
         print('Invalid arguments.')
         exit(1)
 
-    config.connex_app.run(debug=True, port=args.port)
+    config.connex_app.run(debug=args.debug, port=args.port)
