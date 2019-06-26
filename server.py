@@ -19,10 +19,10 @@ def get_args():
         "https://stanfordnlp.github.io/stanfordnlp/installation_download.html"
     ap.add_argument('-l', '--lang', type=str,
                     help="StanfordNLP language code. Check\n" + lang_code_link,
-                    default='en')
+                    default='de')
     ap.add_argument('-m', '--models_dir', type=str,
                     help="Directory for language modules.`",
-                    default=os.path.join(Path.home(), 'stanfordnlp_resources'))
+                    default=config.models_dir)
     ap.add_argument('-p', '--port', type=int,
                     help="Port number to run this service on.",
                     default=5010)
