@@ -12,7 +12,8 @@ python3.7 -m venv env
 source env/bin/activate
 
 su
-cp download.zip /data/language_models
+cp [DOWNLOAD_DIR]/download.zip /data/language_models
+cd /data/language_models
 unzip download.zip
 rm download.zip
 exit
