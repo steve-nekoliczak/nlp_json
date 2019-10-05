@@ -23,6 +23,6 @@ def process_sentences(sentences_str):
 
             word_obj.feats = dict(x.split('=') for x in word.feats.split('|') if "=" in x)
 
-            sentences_json[i].append(dummy_schema.dump(word_obj).data)
+            sentences_json[i].append(dummy_schema.dump(word_obj))
 
     return sentences_json
