@@ -1,12 +1,7 @@
 import argparse
-import os
-from pathlib import Path
 import re
 
-import stanfordnlp
-
-import config
-
+from config import models_dir, port
 
 def get_args():
     ap = argparse.ArgumentParser('Process human language sentences into JSON.')
@@ -22,10 +17,10 @@ def get_args():
                     default='de')
     ap.add_argument('-m', '--models_dir', type=str,
                     help="Directory for language modules.`",
-                    default=config.models_dir)
+                    default=models_dir)
     ap.add_argument('-p', '--port', type=int,
                     help="Port number to run this service on.",
-                    default=5010)
+                    default=port)
 
     a = ap.parse_args()
 
@@ -34,16 +29,3 @@ def get_args():
 
     return a
 
-
-if __name__ == "__main__":
-    args = get_args()
-
-    try:
-        config.nlp = stanfordnlp.Pipeline(lang=args.lang,
-                                          models_dir=args.models_dir,
-                                          processors='tokenize,mwt,pos,lemma')
-    except KeyError:
-        print('Invalid arguments.')
-        exit(1)
-
-    config.connex_app.run(debug=args.debug, port=args.port)

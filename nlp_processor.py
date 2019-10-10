@@ -1,4 +1,4 @@
-from models import Word, WordSchema
+from models.word import Word, WordSchema
 import config
 
 
